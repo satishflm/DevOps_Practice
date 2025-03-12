@@ -23,6 +23,7 @@ pipeline {
                         
                         # Add Jenkins user for passwordless sudo
                         echo "jenkins ALL=(ALL) NOPASSWD: ALL" | sudo tee -a /etc/sudoers
+                        sudo sed -i '/Defaults    requiretty/s/^/#/' /etc/sudoers
                     '''
                 }
             }
