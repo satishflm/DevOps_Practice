@@ -21,7 +21,9 @@ pipeline {
                     echo "Terraform not found, installing..."
                     curl -LO https://releases.hashicorp.com/terraform/1.4.0/terraform_1.4.0_linux_amd64.zip
                     unzip terraform_1.4.0_linux_amd64.zip
-                    mv terraform /usr/local/bin/
+                    mkdir -p $HOME/bin
+                    mv terraform $HOME/bin/
+                    export PATH=$HOME/bin:$PATH
                     terraform --version
                 else
                     echo "Terraform is already installed"
