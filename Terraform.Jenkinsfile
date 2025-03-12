@@ -13,6 +13,21 @@ pipeline {
             }
         }
 
+        stage('Modify sudoers for Passwordless sudo') {
+            steps {
+                script {
+                    // Ensure Jenkins can execute sudo commands without a password prompt
+                    sh '''
+                        # Backup the sudoers file before modifying it
+                        sudo cp /etc/sudoers /etc/sudoers.bak
+                        
+                        # Add Jenkins user for passwordless sudo
+                        echo "jenkins ALL=(ALL) NOPASSWD: ALL" | sudo tee -a /etc/sudoers
+                    '''
+                }
+            }
+        }
+
         stage('Install Terraform') {
             steps {
                 sh '''
