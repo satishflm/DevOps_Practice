@@ -20,7 +20,7 @@ pipeline {
                 then
                     echo "Terraform not found, installing..."
                     curl -LO https://releases.hashicorp.com/terraform/1.4.0/terraform_1.4.0_linux_amd64.zip
-                    unzip terraform_1.4.0_linux_amd64.zip
+                    unzip -o terraform_1.4.0_linux_amd64.zip  # Added -o flag to overwrite without prompt
                     mkdir -p $HOME/bin
                     mv terraform $HOME/bin/
                     export PATH=$HOME/bin:$PATH
