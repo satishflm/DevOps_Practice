@@ -1,0 +1,35 @@
+---
+- name: Install Terraform on Amazon Linux
+  hosts: localhost
+  become: true
+  tasks:
+    - name: Install required packages (yum-utils, shadow-utils)
+      yum:
+        name:
+          - yum-utils
+          - shadow-utils
+        state: present
+
+    - name: Add the HashiCorp repository for Terraform
+      yum_repository:
+        name: hashicorp
+        description: HashiCorp Stable - $basearch
+        baseurl: https://rpm.releases.hashicorp.com/AmazonLinux/hashicorp.repo
+        gpgcheck: 1
+        enabled: 1
+        gpgkey: https://rpm.releases.hashicorp.com/gpg
+
+    - name: Install Terraform
+      yum:
+        name: terraform
+        state: present
+
+    - name: Verify Terraform installation
+      command: terraform --version
+      register: terraform_version
+      changed_when: false
+
+    - name: Display Terraform version
+      debug:
+        msg: "Terraform version installed: {{ terraform_version.stdout }}"
+
