@@ -13,14 +13,6 @@ pipeline {
             }
         }
 
-        stage('Modify Sudoers for Jenkins') {
-            steps {
-                sh '''
-                echo "jenkins ALL=(ALL) NOPASSWD:ALL" | sudo tee -a /etc/sudoers > /dev/null
-                '''
-            }
-        }
-
         stage('Install Terraform') {
             steps {
                 sh '''
