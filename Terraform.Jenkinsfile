@@ -19,9 +19,9 @@ pipeline {
                 if ! command -v terraform &> /dev/null
                 then
                     echo "Terraform not found, installing..."
-                    yum install -y yum-utils shadow-utils
-                    yum-config-manager --add-repo https://rpm.releases.hashicorp.com/AmazonLinux/hashicorp.repo
-                    yum -y install terraform
+                    curl -LO https://releases.hashicorp.com/terraform/1.4.0/terraform_1.4.0_linux_amd64.zip
+                    unzip terraform_1.4.0_linux_amd64.zip
+                    mv terraform /usr/local/bin/
                     terraform --version
                 else
                     echo "Terraform is already installed"
