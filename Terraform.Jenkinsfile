@@ -9,7 +9,7 @@ pipeline {
     stages {
         stage('Checkout Code') {
             steps {
-                git branch: 'master', url: 'https://github.com/sai2k21/Devops-infra-exercise.git'
+                git branch: 'master', url: 'https://github.com/satishflm/DevOps_Practice.git'
             }
         }
 
